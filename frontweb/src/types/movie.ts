@@ -5,6 +5,7 @@ export type Movie = {
   title: string;
   subTitle: string;
   synopsis: string;
+  imgUrl: string;
   year: number;
   reviews: Review[];
 };
