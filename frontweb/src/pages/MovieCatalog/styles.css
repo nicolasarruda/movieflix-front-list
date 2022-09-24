@@ -1,0 +1,22 @@
+.list-movies-container {
+  padding: 12px 20px 0px 15px;
+  text-decoration: none;
+}
+
+.list-movies-container h1 {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 50px;
+}
+
+.list-movies-container p {
+  font-size: 18px;
+  margin-bottom: 18px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+}
