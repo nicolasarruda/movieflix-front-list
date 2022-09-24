@@ -26,19 +26,21 @@ const MovieCatalog = () => {
   return (
     <div className="list-filter-container">
       <MovieFilter />
-
-      {movies.map((movie) => {
-        return (
-          <Link
-            key={movie.id}
-            to={`movies/${movie.id}/reviews`}
-            className="text-link"
-          >
-            <MovieCard movie={movie} />
-          </Link>
-        );
-      })}
-
+      <div className="row">
+        {movies.map((movie) => {
+          return (
+            <div className="col-sm-6 col-xl-3">
+              <Link
+                key={movie.id}
+                to={`movies/${movie.id}/reviews`}
+                className="text-link"
+              >
+                <MovieCard movie={movie} />
+              </Link>
+            </div>
+          );
+        })}
+      </div>
       <Pagination />
     </div>
   );

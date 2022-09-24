@@ -4,6 +4,7 @@
   padding-bottom: 52px;
   border-radius: 4px;
   width: 100%;
+  height: 700px;
 }
 
 .list-movies-container:hover {
@@ -24,6 +25,9 @@
 
 .movie-content-container {
   padding: 10px 20px 0 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .movie-content-container h1 {
@@ -38,8 +42,56 @@
 }
 
 .movie-content-container p {
-  font-size: 18px;
   text-decoration: none;
   color: #fff;
   font-size: 14px;
+}
+
+@media (min-width: 576px) {
+  .list-movies-container {
+    margin-top: 20px;
+    padding-bottom: 34px;
+  }
+
+  .image-container img {
+    margin-top: 26px;
+  }
+}
+
+@media (min-width: 768px) {
+  .list-movies-container {
+    margin-top: 40px;
+    padding-bottom: 58px;
+  }
+
+  .image-container img {
+    margin-top: 20px;
+  }
+
+  .movie-content-container {
+    padding-top: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+  .list-movies-container {
+    padding-bottom: 69px;
+  }
+
+  .movie-content-container {
+    padding-top: 21px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .list-movies-container {
+    padding-bottom: 34px;
+  }
+
+  .image-container img {
+    margin-top: 26px;
+  }
+  .movie-content-container {
+    padding-top: 10px;
+  }
 }
