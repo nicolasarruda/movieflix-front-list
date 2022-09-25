@@ -29,12 +29,8 @@ const MovieCatalog = () => {
       <div className="row">
         {movies.map((movie) => {
           return (
-            <div className="col-sm-6 col-xl-3">
-              <Link
-                key={movie.id}
-                to={`movies/${movie.id}/reviews`}
-                className="text-link"
-              >
+            <div key={movie.id} className="col-sm-6 col-xl-3">
+              <Link to={`movies/${movie.id}/reviews`} className="text-link">
                 <MovieCard movie={movie} />
               </Link>
             </div>
