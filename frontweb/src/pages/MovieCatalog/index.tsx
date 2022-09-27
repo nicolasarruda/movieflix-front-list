@@ -1,4 +1,4 @@
-import MovieFilter from 'components/MovieFilter';
+import MovieFilter, { MovieFilterData } from 'components/MovieFilter';
 import Pagination from 'components/Pagination';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -8,24 +8,41 @@ import './styles.css';
 import { AxiosRequestConfig } from 'axios';
 import { Movie } from 'types/movie';
 
+type ControlComponentsData = {
+  filterData: MovieFilterData;
+};
+
 const MovieCatalog = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
+
+  const [controlComponentsData, setControlComponentsData] =
+    useState<ControlComponentsData>({
+      filterData: { genre: null },
+    });
 
   useEffect(() => {
     const config: AxiosRequestConfig = {
       method: 'GET',
       url: '/movies',
       withCredentials: true,
+      params: {
+        genreId: controlComponentsData.filterData.genre?.id,
+      },
     };
 
     requestBackEnd(config).then((response) => {
-      setMovies(response.data.content);
+      const content = response.data.content;
+      setMovies(content);
     });
-  });
+  }, [controlComponentsData]);
+
+  const handleSubmitFilter = (data: MovieFilterData) => {
+    setControlComponentsData({ filterData: data });
+  };
 
   return (
     <div className="list-filter-container">
-      <MovieFilter />
+      <MovieFilter onSubmitFilter={handleSubmitFilter} />
       <div className="row">
         {movies.map((movie) => {
           return (
