@@ -20,6 +20,8 @@ const MovieCatalog = () => {
       filterData: { genre: null },
     });
 
+  const getMovies = () => {};
+
   useEffect(() => {
     const config: AxiosRequestConfig = {
       method: 'GET',
@@ -54,7 +56,7 @@ const MovieCatalog = () => {
           );
         })}
       </div>
-      <Pagination />
+      <Pagination pageCount={5} range={3} onChange={getMovies} />
     </div>
   );
 };

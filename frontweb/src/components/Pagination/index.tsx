@@ -1,10 +1,40 @@
-const Pagination = () => {
+import ReactPaginate from 'react-paginate';
+import { ReactComponent as ArrowIcon } from './../../assets/images/arrow-icon.svg';
+
+import './styles.css';
+
+type Props = {
+  forcePage?: number;
+  pageCount: number;
+  range: number;
+  onChange?: (pageNumber: number) => void;
+};
+
+const Pagination = ({ forcePage, pageCount, range, onChange }: Props) => {
   return (
-    <div className="pagination-container">
-      <button>1</button>
-      <button>1</button>
-      <button>1</button>
-    </div>
+    <ReactPaginate
+      forcePage={forcePage}
+      pageCount={pageCount}
+      pageRangeDisplayed={range}
+      marginPagesDisplayed={1}
+      containerClassName="pagination-container"
+      pageLinkClassName="pagination-item"
+      breakClassName="pagination-item"
+      previousClassName="arrow-previous"
+      nextClassName="arrow-next"
+      activeClassName="pagination-link-active"
+      disabledClassName="arrow-inactive"
+      previousLabel={
+        <div className="pagination-arrow-container">
+          <ArrowIcon />
+        </div>
+      }
+      nextLabel={
+        <div className="pagination-arrow-container">
+          <ArrowIcon />
+        </div>
+      }
+    />
   );
 };
 
