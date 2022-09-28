@@ -30,16 +30,6 @@
   background-color: #6c6c6c !important;
 }
 
-.movie-genre-select__dropdownIndicator:hover {
-  background-color: #6c6c6c !important;
-  color: #6c6c6c !important;
-}
-
-.movie-genre-select__dropdownIndicator {
-  background-color: #6c6c6c !important;
-  color: #6c6c6c !important;
-}
-
 .movie-genre-select__indicator {
   height: 35px;
   width: 30px;
@@ -125,13 +115,8 @@
   background-color: #525252;
 }
 
-.movie-genre-select__multi-value__remove {
-  background-color: #525252;
-  display: none !important;
-}
-
-.movie-genre-select__multi-value__remove:hover {
-  display: none !important;
+.movie-genre-select__single-value {
+  color: #fff !important;
 }
 
 .movie-genre-select__input {

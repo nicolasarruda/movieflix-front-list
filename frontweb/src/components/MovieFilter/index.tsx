@@ -1,5 +1,3 @@
-import { ReactComponent as ClearIcon } from './../../assets/images/clear-icon.svg';
-import { ReactComponent as ArrowIcon } from './../../assets/images/arrow-icon.svg';
 import './styles.css';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
@@ -22,7 +20,6 @@ const MovieFilter = ({ onSubmitFilter }: Props) => {
     useForm<MovieFilterData>();
 
   const onSubmit = (formData: MovieFilterData) => {
-    console.log('ENVIOU', formData);
     onSubmitFilter(formData);
   };
 
@@ -48,7 +45,7 @@ const MovieFilter = ({ onSubmitFilter }: Props) => {
 
   return (
     <div className="filter-container bg-secondary">
-      <form onSubmit={handleSubmit(onSubmit)} className="movie-filter-form">
+      <form onClick={handleSubmit(onSubmit)} className="movie-filter-form">
         <div className="movie-filter-category-container">
           <Controller
             name="genre"
@@ -57,24 +54,18 @@ const MovieFilter = ({ onSubmitFilter }: Props) => {
               <Select
                 {...field}
                 options={selectGenres}
+                isClearable
                 classNamePrefix="movie-genre-select"
-                isMulti
                 placeholder="Gênero"
-                // onChange={(value) => handleChangeGenre(value as Genre)}
+                onChange={(value) =>
+                  handleChangeGenre(value as unknown as Genre)
+                }
                 getOptionLabel={(genre: Genre) => genre.name}
                 getOptionValue={(genre: Genre) => String(genre.id)}
               />
             )}
           />
         </div>
-        {/* <div className="movie-buttons-container">
-          <button className="btn-movie-clear-button bg-secondary">
-            <ClearIcon />
-          </button>
-          <button className="btn-movie-filter-button bg-secondary">
-            <ArrowIcon />
-          </button>
-        </div> */}
       </form>
     </div>
   );

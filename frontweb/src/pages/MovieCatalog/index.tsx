@@ -1,6 +1,6 @@
 import MovieFilter, { MovieFilterData } from 'components/MovieFilter';
 import Pagination from 'components/Pagination';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { requestBackEnd } from 'utils/requests';
 import MovieCard from '../../components/MovieCard';
@@ -9,38 +9,52 @@ import { AxiosRequestConfig } from 'axios';
 import { Movie } from 'types/movie';
 
 type ControlComponentsData = {
+  activePage: number;
   filterData: MovieFilterData;
 };
 
 const MovieCatalog = () => {
+  const pageSize = 4;
+
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const [controlComponentsData, setControlComponentsData] =
     useState<ControlComponentsData>({
+      activePage: 0,
       filterData: { genre: null },
     });
 
-  const getMovies = () => {};
+  const handlePageChange = (pageNumber: number) => {
+    setControlComponentsData({
+      activePage: pageNumber,
+      filterData: controlComponentsData.filterData,
+    });
+  };
 
-  useEffect(() => {
+  const handleSubmitFilter = (data: MovieFilterData) => {
+    setControlComponentsData({ activePage: 0, filterData: data });
+  };
+
+  const getMovies = useCallback(() => {
     const config: AxiosRequestConfig = {
       method: 'GET',
       url: '/movies',
       withCredentials: true,
       params: {
         genreId: controlComponentsData.filterData.genre?.id,
+        page: controlComponentsData.activePage,
+        size: pageSize,
       },
     };
-
     requestBackEnd(config).then((response) => {
       const content = response.data.content;
       setMovies(content);
     });
   }, [controlComponentsData]);
 
-  const handleSubmitFilter = (data: MovieFilterData) => {
-    setControlComponentsData({ filterData: data });
-  };
+  useEffect(() => {
+    getMovies();
+  }, [getMovies]);
 
   return (
     <div className="list-filter-container">
@@ -56,7 +70,12 @@ const MovieCatalog = () => {
           );
         })}
       </div>
-      <Pagination pageCount={5} range={3} onChange={getMovies} />
+      <Pagination
+        forcePage={controlComponentsData.activePage}
+        pageCount={3}
+        range={3}
+        onChange={handlePageChange}
+      />
     </div>
   );
 };
