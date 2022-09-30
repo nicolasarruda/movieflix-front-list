@@ -7,10 +7,10 @@ type Props = {
 
 const ReviewList = ({ reviews }: Props): JSX.Element => {
   return (
-    <div className="bg-secondary container-post">
+    <div className="bg-secondary post-container">
       {reviews.map((review) => {
         return (
-          <div key={review.id} className="individual-container-post">
+          <div key={review.id} className="individual-post-container">
             <img src={StarImage} alt="estrela" />
             <h1>{review.user.name}</h1>
             <p>{review.text}</p>

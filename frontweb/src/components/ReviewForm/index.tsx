@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { AxiosRequestConfig } from 'axios';
 import { Review } from '../../types/review';
 import { requestBackEnd } from 'utils/requests';
+import { toast } from 'react-toastify';
 
 type Props = {
   movieId: string;
@@ -36,15 +37,17 @@ const ReviewForm = ({ movieId, onInsertReview }: Props) => {
       .then((response) => {
         onInsertReview(response.data);
         setValue('text', '');
+        toast.info('Avaliação cadastrada com sucesso!');
       })
       .catch((error) => {
         console.log('ERRO', error);
+        toast.error('Erro no cadastro da avaliação');
       });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="container-input bg-secondary">
+      <div className="input-container bg-secondary">
         <input
           {...register('text', {
             required: 'Campo obrigatório',

@@ -64,18 +64,22 @@ const MovieCatalog = () => {
           return (
             <div key={movie.id} className="col-sm-6 col-xl-3">
               <Link to={`movies/${movie.id}/reviews`} className="text-link">
-                <MovieCard movie={movie} />
+                <div className="basic-movie-card movie-catalog-card bg-secondary">
+                  <MovieCard movie={movie} />
+                </div>
               </Link>
             </div>
           );
         })}
       </div>
-      <Pagination
-        forcePage={controlComponentsData.activePage}
-        pageCount={3}
-        range={3}
-        onChange={handlePageChange}
-      />
+      <div className="movie-catalog-pagination">
+        <Pagination
+          forcePage={controlComponentsData.activePage}
+          pageCount={3}
+          range={3}
+          onChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };

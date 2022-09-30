@@ -4,9 +4,11 @@ import { useParams } from 'react-router-dom';
 import { requestBackEnd } from 'utils/requests';
 import { Review } from 'types/review';
 import ReviewForm from 'components/ReviewForm';
-import { hasAnyRoles } from '../../../utils/auth';
+import { hasAnyRoles } from 'utils/auth';
 import ReviewList from 'components/ReviewList';
 import './styles.css';
+import MovieCard from 'components/MovieCard';
+import { Movie } from 'types/movie';
 
 type UrlParams = {
   movieId: string;
@@ -16,6 +18,8 @@ const MovieDetails = () => {
   const { movieId } = useParams<UrlParams>();
 
   const [reviews, setReviews] = useState<Review[]>([]);
+
+  const [movie, setMovie] = useState<Movie>();
 
   useEffect(() => {
     const config: AxiosRequestConfig = {
@@ -27,6 +31,7 @@ const MovieDetails = () => {
     requestBackEnd(config)
       .then((response) => {
         const { reviews } = response.data;
+        setMovie(response.data);
         setReviews(reviews);
       })
       .catch((error) => {
@@ -41,11 +46,12 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="container-details">
-      <div className="container-title">
-        <h1>Tela detalhes do filme id: {movieId}</h1>
+    <div className="details-container">
+      <div className="basic-movie-card movie-details-container">
+        <MovieCard movie={movie} />
       </div>
       {hasAnyRoles(['ROLE_MEMBER']) && (
+        
         <ReviewForm movieId={movieId} onInsertReview={handleInsertReview} />
       )}
 
